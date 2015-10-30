@@ -3,7 +3,6 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include "direct.h"
-#include "utils.h"
 using namespace std;
 using namespace cv;
 using namespace pugi;

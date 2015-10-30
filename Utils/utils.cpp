@@ -12,6 +12,8 @@
 // <summary>Some util functions.</summary>
 // ***********************************************************************
 #include "utils.h"
+#include "pugixml\pugixml.cpp"
+
 using namespace std;
 using namespace cv;
 

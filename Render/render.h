@@ -1,7 +1,7 @@
 #ifndef RENDER_H
 #define RENDER_H
 
-#include "common.h"
+#include "Utils\utils.h"
 
 
 // void RenderImage(std::string scene_xml, const cv::Vec3d& light_direction);
