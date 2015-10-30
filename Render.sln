@@ -5,7 +5,11 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Render", "Render\Render.vcxproj", "{6B408729-9A1B-47D7-829C-7F904190F4BB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Relighting", "Relighting\Relighting.vcxproj", "{63ED566F-59BE-4890-A782-C9ED74CA25BC}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Compression", "Relighting\Relighting.vcxproj", "{63ED566F-59BE-4890-A782-C9ED74CA25BC}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Demo", "Demo\Demo.vcxproj", "{18196C98-9122-4D7A-B1FA-F6B4ACCD79A4}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Utils", "Utils\Utils.vcxproj", "{4D51DCB4-C0E5-4AA0-93C3-D4FF4CDA13A0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +35,22 @@ Global
 		{63ED566F-59BE-4890-A782-C9ED74CA25BC}.Release|Win32.Build.0 = Release|Win32
 		{63ED566F-59BE-4890-A782-C9ED74CA25BC}.Release|x64.ActiveCfg = Release|x64
 		{63ED566F-59BE-4890-A782-C9ED74CA25BC}.Release|x64.Build.0 = Release|x64
+		{18196C98-9122-4D7A-B1FA-F6B4ACCD79A4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{18196C98-9122-4D7A-B1FA-F6B4ACCD79A4}.Debug|Win32.Build.0 = Debug|Win32
+		{18196C98-9122-4D7A-B1FA-F6B4ACCD79A4}.Debug|x64.ActiveCfg = Debug|x64
+		{18196C98-9122-4D7A-B1FA-F6B4ACCD79A4}.Debug|x64.Build.0 = Debug|x64
+		{18196C98-9122-4D7A-B1FA-F6B4ACCD79A4}.Release|Win32.ActiveCfg = Release|Win32
+		{18196C98-9122-4D7A-B1FA-F6B4ACCD79A4}.Release|Win32.Build.0 = Release|Win32
+		{18196C98-9122-4D7A-B1FA-F6B4ACCD79A4}.Release|x64.ActiveCfg = Release|x64
+		{18196C98-9122-4D7A-B1FA-F6B4ACCD79A4}.Release|x64.Build.0 = Release|x64
+		{4D51DCB4-C0E5-4AA0-93C3-D4FF4CDA13A0}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4D51DCB4-C0E5-4AA0-93C3-D4FF4CDA13A0}.Debug|Win32.Build.0 = Debug|Win32
+		{4D51DCB4-C0E5-4AA0-93C3-D4FF4CDA13A0}.Debug|x64.ActiveCfg = Debug|x64
+		{4D51DCB4-C0E5-4AA0-93C3-D4FF4CDA13A0}.Debug|x64.Build.0 = Debug|x64
+		{4D51DCB4-C0E5-4AA0-93C3-D4FF4CDA13A0}.Release|Win32.ActiveCfg = Release|Win32
+		{4D51DCB4-C0E5-4AA0-93C3-D4FF4CDA13A0}.Release|Win32.Build.0 = Release|Win32
+		{4D51DCB4-C0E5-4AA0-93C3-D4FF4CDA13A0}.Release|x64.ActiveCfg = Release|x64
+		{4D51DCB4-C0E5-4AA0-93C3-D4FF4CDA13A0}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

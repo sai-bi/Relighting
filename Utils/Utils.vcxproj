@@ -18,24 +18,10 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="compress.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="utils.cpp" />
-    <ClCompile Include="wavelet.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="common.h" />
-    <ClInclude Include="compress.h" />
-    <ClInclude Include="utils.h" />
-    <ClInclude Include="wavelet.h" />
-    <ClInclude Include="relight.h" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{63ED566F-59BE-4890-A782-C9ED74CA25BC}</ProjectGuid>
+    <ProjectGuid>{4D51DCB4-C0E5-4AA0-93C3-D4FF4CDA13A0}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Relighting</RootNamespace>
-    <ProjectName>Compression</ProjectName>
+    <RootNamespace>Utils</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -45,7 +31,7 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -58,7 +44,7 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -125,7 +111,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)Render\utils.h;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -164,7 +150,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)Render\utils.h;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -174,6 +160,16 @@
       <AdditionalDependencies>opencv_ts300.lib;opencv_world300.lib;IlmImf.lib;ippicvmt.lib;libjasper.lib;libjpeg.lib;libpng.lib;libtiff.lib;libwebp.lib;opencv_calib3d300.lib;opencv_core300.lib;opencv_features2d300.lib;opencv_flann300.lib;opencv_highgui300.lib;opencv_imgcodecs300.lib;opencv_imgproc300.lib;opencv_ml300.lib;opencv_objdetect300.lib;opencv_photo300.lib;opencv_shape300.lib;opencv_stitching300.lib;opencv_superres300.lib;opencv_video300.lib;opencv_videoio300.lib;opencv_videostab300.lib;zlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="utils.cpp" />
+    <ClCompile Include="wavelet.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="common.h" />
+    <ClInclude Include="utils.h" />
+    <ClInclude Include="wavelet.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
