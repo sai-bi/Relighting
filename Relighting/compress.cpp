@@ -1,5 +1,4 @@
 #include "compress.h"
-#include "wavelet.h"
 using namespace std;
 using namespace Eigen;
 using namespace cv;
@@ -48,7 +47,7 @@ void LoadPerLightImages(int cubemap_length, int cubeface_index,
 			string image_path = face_image_dir + "\\" + to_string(count) + postfix + ".exr";
 			per_light_images[count] = imread(image_path, cv::IMREAD_ANYCOLOR | cv::IMREAD_ANYDEPTH);
 
-			UpdateProgressBar(count, image_num);
+			UpdateProgressBar(count, image_num, 20);
 			count++;
 		}
 	}
@@ -138,7 +137,7 @@ void SaveCompressedImages(cv::Mat_<cv::Vec3f>* per_light_images, int cubemap_len
 	for (int i = 0; i < total; i++){
 		string output_path = target_dir + "\\" + to_string(i) + postfix + ".exr";
 		cv::imwrite(output_path, per_light_images[i]);
-		UpdateProgressBar(i, total);
+		UpdateProgressBar(i, total, 20);
 	} 
 }
 
