@@ -35,6 +35,7 @@
     <ProjectGuid>{63ED566F-59BE-4890-A782-C9ED74CA25BC}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Relighting</RootNamespace>
+    <ProjectName>Compression</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
