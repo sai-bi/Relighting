@@ -79,15 +79,15 @@ void RenderCubemap(string mitsuba_path, std::string scene_path, std::string targ
 				vector<Mat> cubemap;
 				CreateCubemap(i, k, j, 2, cubemap);
 				Mat envmap;
-				convertToLLMap(envmap, cubemap, Size(256, 128));
+				ConvertCubemapToLightProbe(envmap, cubemap, Size(256, 128));
 				imwrite(env_path, envmap);
 
-				Vec3d direction;
-				double v = (j + 0.5) / (double)cubemap_length;
-				double u = (k + 0.5) / (double)cubemap_length;
+				// Vec3d direction;
+				// double v = (j + 0.5) / (double)cubemap_length;
+				// double u = (k + 0.5) / (double)cubemap_length;
 				// direction = CubeLightDirection(u, v, i);
 				// ModifyXmlLight(doc, direction);
-				DumpXml(doc, temp_scene_path);
+				// DumpXml(doc, temp_scene_path);
 				
 				string output_path = output_dir + "\\" + to_string(count);
 				RenderScene(mitsuba_path, temp_scene_path, output_path);
