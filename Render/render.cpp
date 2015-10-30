@@ -74,20 +74,13 @@ void RenderCubemap(string mitsuba_path, std::string scene_path, std::string targ
 		for (int j = 0; j < cubemap_length; j++){
 			for (int k = 0; k < cubemap_length; k++){
 				printf("Rendering face %d: (%d, %d)...\n", i, j, k);
-				
+				// UpdateProgressBar(count, cubemap_length * cubemap_length, 1);
 				// create cubemap
 				vector<Mat> cubemap;
-				CreateCubemap(i, k, j, 2, cubemap);
+				CreateCubemap(i, k, j, cubemap_length, cubemap);
 				Mat envmap;
 				ConvertCubemapToLightProbe(envmap, cubemap, Size(256, 128));
 				imwrite(env_path, envmap);
-
-				// Vec3d direction;
-				// double v = (j + 0.5) / (double)cubemap_length;
-				// double u = (k + 0.5) / (double)cubemap_length;
-				// direction = CubeLightDirection(u, v, i);
-				// ModifyXmlLight(doc, direction);
-				// DumpXml(doc, temp_scene_path);
 				
 				string output_path = output_dir + "\\" + to_string(count);
 				RenderScene(mitsuba_path, temp_scene_path, output_path);
@@ -122,8 +115,8 @@ void PrepareDirectory(std::string target_dir){
 void StartRendering(){
 	string mitsuba_path = "C:\\Users\\bisai\\Downloads\\Mitsuba";
 	string scene_path = "C:\\Users\\bisai\\Documents\\research\\prt\\scenes\\matpreview.xml";
-	string target_dir = "C:\\Users\\bisai\\Documents\\research\\prt\\data1";
-	int cubemap_length = 2;
+	string target_dir = "C:\\Users\\bisai\\Documents\\research\\prt\\data2";
+	int cubemap_length = 16;
 
 	RenderCubemap(mitsuba_path, scene_path, target_dir, cubemap_length);
 }

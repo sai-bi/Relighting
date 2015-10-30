@@ -226,33 +226,3 @@ int subPixelF(cv::Vec3f& color, const cv::Mat& image, float x, float y)
 
 	return 0;
 }
-
-
-/// <summary>
-/// Updates the progress bar.
-/// </summary>
-/// <param name="curr">The curr.</param>
-/// <param name="total">The total.</param>
-inline void UpdateProgressBar(int curr, int total){
-	int divide = total / 25 + 2;
-	curr = curr + 1;
-	if (curr != total && curr % divide != 1){
-		return;
-	}
-	double progress = curr / (double)(total - 1);
-	int barWidth = 70;
-	std::cout << "[";
-	int pos = (int)(barWidth * progress);
-	for (int i = 0; i < barWidth; ++i) {
-		if (i < pos) std::cout << "=";
-		else if (i == pos) std::cout << ">";
-		else std::cout << " ";
-	}
-	if (curr != total){
-		std::cout << "] " << int(progress * 100.0) << " %\r";
-		std::cout.flush();
-	}
-	else{
-		std::cout << "] " << int(progress * 100.0) << " %" << std::endl;
-	}
-}
