@@ -114,7 +114,7 @@ void PrepareDirectory(std::string target_dir){
 void StartRendering(){
 	string mitsuba_path = "C:\\Users\\bisai\\Downloads\\Mitsuba";
 	string scene_path = "C:\\Users\\bisai\\Documents\\research\\prt\\scenes\\matpreview.xml";
-	string target_dir = "C:\\Users\\bisai\\Documents\\research\\prt\\data2";
+	string target_dir = "C:\\Users\\bisai\\Documents\\research\\prt\\data3";
 	int cubemap_length = 16;
 
 	RenderCubemap(mitsuba_path, scene_path, target_dir, cubemap_length);
