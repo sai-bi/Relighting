@@ -6,7 +6,6 @@
 
 // void RenderImage(std::string scene_xml, const cv::Vec3d& light_direction);
 
-cv::Vec3d CubeLightDirection(double u, double v, int face_index);
 void ParseXml(std::string xml_path, pugi::xml_document& doc);
 void DumpXml(const pugi::xml_document& doc, std::string file_path);
 void ModifyXmlLight(pugi::xml_document& doc, const cv::Vec3d& light_direction);

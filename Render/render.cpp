@@ -32,29 +32,11 @@ void RenderScene(std::string mitsuba_path, std::string xml_path, std::string out
 	system(command.data());
 
 	// also store the rendering result in png
-	command = mitsuba_path + "\\mtsutil.exe tonemap " + output_path + ".exr";
-	system(command.data());
+	// command = mitsuba_path + "\\mtsutil.exe tonemap " + output_path + ".exr";
+	// system(command.data());
 }
 
-// Map cubemap coordinates to 3D coordinates
-// Note: mitsuba's coordinate system is quite special, with x to the left, y to to the top, and z to the inside
-cv::Vec3d CubeLightDirection(double u, double v, int face_index){
-	double a = 1;
-	double b = 2 * u - 1;
-	double c = 2 * v - 1;
-	Vec3d direction(0, 0, 0);
-	switch (face_index){
-	case 0: direction = Vec3d(-a, -c, -b); break;
-	case 1: direction = Vec3d(a, -c, b); break;
-	case 2: direction = Vec3d(-b, a, c); break;
-	case 3: direction = Vec3d(-b, -a, -c); break;
-	case 4: direction = Vec3d(-b, -c, a); break;
-	case 5: direction = Vec3d(b, -c, -a); break;
-	default:exit(-1);
-	}
-	direction = normalize(direction);
-	return -1.0 * direction;
-}
+
 
 
 void RenderCubemap(string mitsuba_path, std::string scene_path, std::string target_dir, int cubemap_length){
@@ -75,13 +57,17 @@ void RenderCubemap(string mitsuba_path, std::string scene_path, std::string targ
 				printf("Rendering face %d: (%d, %d)...\n", i, j, k);
 				// UpdateProgressBar(count, cubemap_length * cubemap_length, 1);
 				// create cubemap
+				//env_path = scene_dir + "\\" + "temp_env" + to_string(count) + ".exr";
+				string output_path = output_dir + "\\" + to_string(count) + ".exr";
+
 				vector<Mat> cubemap;
 				CreateCubemap(i, k, j, cubemap_length, cubemap);
+
+
 				Mat envmap;
 				ConvertCubemapToLightProbe(envmap, cubemap, Size(256, 128));
 				imwrite(env_path, envmap);
 				
-				string output_path = output_dir + "\\" + to_string(count);
 				RenderScene(mitsuba_path, temp_scene_path, output_path);
 				count++;
 			}
@@ -114,7 +100,7 @@ void PrepareDirectory(std::string target_dir){
 void StartRendering(){
 	string mitsuba_path = "C:\\Users\\bisai\\Downloads\\Mitsuba";
 	string scene_path = "C:\\Users\\bisai\\Documents\\research\\prt\\scenes\\matpreview.xml";
-	string target_dir = "C:\\Users\\bisai\\Documents\\research\\prt\\data3";
+	string target_dir = "C:\\Users\\bisai\\Documents\\research\\prt\\data5";
 	int cubemap_length = 16;
 
 	RenderCubemap(mitsuba_path, scene_path, target_dir, cubemap_length);

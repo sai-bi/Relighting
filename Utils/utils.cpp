@@ -64,7 +64,7 @@ int saveAsCrossHorEnv(const std::string& filename, const std::vector<cv::Mat>& c
 void CreateCubemap(int face_index, int x, int y, int cubemap_length, vector<Mat>& cubeface){
 	cubeface.resize(6);
 	for (int i = 0; i < 6; i++){
-		cubeface[i].create(cubemap_length, cubemap_length, CV_32FC3);
+		cubeface[i] = Mat(cubemap_length, cubemap_length, CV_32FC3, Vec3f(0,0,0));
 	}
 	cubeface[face_index].at<Vec3f>(y, x) = Vec3f(1, 1, 1);
 }
@@ -180,6 +180,7 @@ int ConvertCubemapToLightProbe(cv::Mat& light_probe, const std::vector<cv::Mat>&
 
 			cv::Vec3f c0;
 			subPixelF(c0, cubemap[face], xc, yc);
+			
 			light_probe.at<cv::Vec3f>(y, x) = c0;
 		}
 	}
@@ -227,4 +228,89 @@ int subPixelF(cv::Vec3f& color, const cv::Mat& image, float x, float y)
 	color = (1.0f - rx) * cx + rx * cx_1;
 
 	return 0;
+}
+
+
+float GetSHValue(const Vec3f& dir, int sh_index){
+	float value;
+	switch (sh_index){
+	case 0: value = 0.282095; break;
+	case 1: value = 0.488603 * dir[1]; break;
+	case 2: value = 0.488603 * dir[2]; break;
+	case 3: value = 0.488603 * dir[0]; break;
+	case 4: value = 1.092548 * dir[0] * dir[1]; break;
+	case 5: value = 1.092548 * dir[1] * dir[2]; break;
+	case 6: value = 0.315392 * (3 * dir[2] * dir[2] - 1); break;
+	case 7: value = 1.092548 * dir[0] * dir[2]; break;
+	case 8: value = 0.546274 * (dir[0] * dir[0] - dir[1] * dir[1]); break;
+	default: exit(-1);  break;
+	}
+	return value;
+}
+
+void CreateSHCubemap(int cubemap_length, int sh_index, vector<Mat>& cubeface){
+	cubeface.resize(6);
+	for (int i = 0; i < 6; i++){
+		cubeface[i] = Mat(cubemap_length, cubemap_length, CV_32FC3, Vec3f(0, 0, 0));
+	}
+
+	for (int i = 0; i < 6; i++){
+		for (int r = 0; r < cubemap_length; r++){
+			for (int c = 0; c < cubemap_length; c++){
+				Vec3f dir = CubeLightDirection((c + 0.5) / (float)cubemap_length, (r + 0.5) / (float)cubemap_length, i);
+				float sh_value = GetSHValue(dir, sh_index);
+				cubeface[i].at<Vec3f>(r, c) = Vec3f(sh_value, sh_value, sh_value);
+			}
+		}
+	}
+}
+
+
+// Map cubemap coordinates to 3D coordinates
+// Note: mitsuba's coordinate system is quite special, with x to the left, y to to the top, and z to the inside
+cv::Vec3d CubeLightDirection(double u, double v, int face_index){
+	double a = 1;
+	double b = 2 * u - 1;
+	double c = 2 * v - 1;
+	Vec3d direction(0, 0, 0);
+	switch (face_index){
+	case 0: direction = Vec3d(-a, -c, -b); break;
+	case 1: direction = Vec3d(a, -c, b); break;
+	case 2: direction = Vec3d(-b, a, c); break;
+	case 3: direction = Vec3d(-b, -a, -c); break;
+	case 4: direction = Vec3d(-b, -c, a); break;
+	case 5: direction = Vec3d(b, -c, -a); break;
+	default:exit(-1);
+	}
+	direction = normalize(direction);
+	// return -1.0 * direction;
+	return direction;
+}
+
+void SaveSHBasisImage(int cubemap_length, int sh_index, const cv::Size& probe_size, const char* file_name){
+	vector<Mat> cube_faces;
+	CreateSHCubemap(cubemap_length, sh_index, cube_faces);
+	Mat light_probe;
+	ConvertCubemapToLightProbe(light_probe, cube_faces, probe_size);
+
+	imwrite(file_name, light_probe);
+	
+	/*int width = probe_size.width;
+	int height = probe_size.height;
+	Mat probe_light(probe_size.height, probe_size.width, CV_32FC3);
+
+	for (int i = 0; i < height; i++){
+		for (int j = 0; j < width; j++){
+			float theta = (i + 0.5) / (float)height * CV_PI;
+			float phi = (j  + 0.5) / (float)width * 2 * CV_PI;
+			Vec3f dir;
+			dir[0] = sinf(theta) * cosf(phi);
+			dir[1] = sinf(theta) * sinf(phi);
+			dir[2] = cosf(theta);
+			float value = GetSHValue(dir, sh_index);
+			probe_light.at<Vec3f>(i, j) = Vec3f(value, value, value);
+		}
+	}
+	imwrite(file_name, probe_light);*/
+
 }

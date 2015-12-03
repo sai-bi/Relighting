@@ -166,6 +166,11 @@
   <ItemGroup>
     <ClInclude Include="demo.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Utils\Utils.vcxproj">
+      <Project>{4d51dcb4-c0e5-4aa0-93c3-d4ff4cda13a0}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
